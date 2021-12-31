@@ -1,0 +1,61 @@
+{
+  "name": "Delete All Bot",
+  "description": "Telegram bot to delete all messages",
+  "logo": "https://telegra.ph/file/da5e146a42d1361958065.jpg",
+  "keywords": [
+    "telegram",
+    "bot",
+    "python",
+    "pyrogram"
+  ],
+    "buildpacks": [{
+    "url": "heroku/python"
+  }],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+      {
+         "options": {
+            "version": "12"
+         },
+         "plan": "heroku-postgresql"
+      }
+   ],
+  "repository": "https://github.com/StarkBotsIndustries/DeleteAllBot",
+  "env": {
+    "API_ID": {
+      "description": "Get this value from my.telegram.org.",
+      "required": true,
+      "value": ""
+    },
+    "API_HASH": {
+      "description": "Get this value from my.telegram.org.",
+      "required": true,
+      "value": ""
+    },
+    "BOT_TOKEN": {
+      "description": "Obtain a Telegram bot token by contacting @BotFather",
+      "required": true,
+      "value": ""
+    },
+    "SESSION": {
+      "description": "Pyrogram String Session using t.me/StarkStringGenBot",
+      "required": true,
+      "value": ""
+    },
+    "OWNER_ID": {
+      "description": "Your Telegram ID",
+      "required": false,
+      "value": ""
+    },
+    "TIMEZONE": {
+      "description": "Don't change if you are from India",
+      "required": false,
+      "value": "Asia/Kolkata"
+    }
+  }
+}
