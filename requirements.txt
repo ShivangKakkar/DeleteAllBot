@@ -1,2 +1,2 @@
-git+https://github.com/pyrogram/pyrogram.git
+Pyrogram
 PyStark>=0.2.1
