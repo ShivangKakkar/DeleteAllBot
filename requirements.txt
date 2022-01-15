@@ -1,2 +1,1 @@
-Pyrogram
 PyStark>=0.2.1
