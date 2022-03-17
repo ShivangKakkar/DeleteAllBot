@@ -1,1 +1,1 @@
-PyStark>=0.2.1
+PyStark>=0.4.0
