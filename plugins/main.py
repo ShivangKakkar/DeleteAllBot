@@ -50,12 +50,13 @@ async def main_func(bot: Stark, msg: Message):
     id_lists = [numbers[i*100:(i+1)*100] for i in range((len(numbers)+100-1) // 100)]
     status = await msg.reply("Trying to delete all messages...")
     for id_list in id_lists:
-        try:
-            await userbot.delete_messages(msg.chat.id, id_list)
-        except FloodWait as e:
-            await asyncio.sleep(e.x)
-            Stark.log(str(e), logging.WARN)
-            await userbot.delete_messages(msg.chat.id, id_list)
+        while True:
+            try:
+                await userbot.delete_messages(msg.chat.id, id_list)
+                break
+            except FloodWait as e:
+                await asyncio.sleep(e.x)
+                Stark.log(str(e), logging.WARN)
     await msg.react("Successful! Deleted Everything. For more bots visit @StarkBots")
     await status.delete()
     await userbot.leave_chat(msg.chat.id)
