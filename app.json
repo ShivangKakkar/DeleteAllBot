@@ -51,11 +51,6 @@
       "description": "Your Telegram ID",
       "required": false,
       "value": ""
-    },
-    "TIMEZONE": {
-      "description": "Don't change if you are from India",
-      "required": false,
-      "value": "Asia/Kolkata"
     }
   }
 }

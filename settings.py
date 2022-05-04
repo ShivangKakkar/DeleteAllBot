@@ -1,36 +1,11 @@
-START = """
-Hey {user}
+START = "delete all messages in your group or channel."
 
-Welcome to {bot}
+HELP = "/delall - Delete All Messages"
 
-I can help you to delete all messages in your group.
-Use below buttons to learn more.
+ABOUT = "A telegram bot to delete all messages in a group or channel"
 
-By @StarkBots
-"""
+REPO = "DeleteAllBot"
 
-HELP = """
-✨ **Available Commands** ✨
+DATABASE_TABLES = ["users"]
 
-/delall - Delete All Messages
-/about - About The Bot
-/help - This Message
-/start - Start the Bot
-/id - Get your ID
-"""
-
-ABOUT = """
-**About This Bot** 
-
-A telegram bot to delete all messages
-
-Source Code : [Click Here](https://github.com/StarkBotsIndustries/DeleteAllBot)
-
-Framework : [Pyrogram](docs.pyrogram.org)
-
-Language : [Python](www.python.org)
-
-Developer : @StarkProgrammer
-"""
-
-BUTTONS = True
+STARKBOTS = True

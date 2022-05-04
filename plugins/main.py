@@ -5,20 +5,17 @@ from pystark import Stark, Message
 from pyrogram.errors import UserAlreadyParticipant, FloodWait
 
 
-@Stark.cmd('delall')
+@Stark.cmd('delall', description="Delete all messages in a group/channel")
 async def main_func(bot: Stark, msg: Message):
-    # Chat type check
     if msg.chat.type == "private":
         return
     if msg.chat.type != "channel":
-        # User admin check
         user = await bot.get_chat_member(msg.chat.id, msg.from_user.id)
         if user.status not in ['creator', 'administrator']:
             return
         if not user.can_delete_messages:
             await msg.react("You don't have `CanDeleteMessages` right. Sorry!")
             return
-    # Bot admin rights check
     bot_id = (await bot.get_me()).id
     cm = await bot.get_chat_member(msg.chat.id, bot_id)
     if cm.status != "administrator":
@@ -30,7 +27,6 @@ async def main_func(bot: Stark, msg: Message):
     elif not cm.can_delete_messages:
         await msg.react("I can't delete messages here. I need that right to work.")
         return
-    # Userbot work
     link = (await bot.get_chat(msg.chat.id)).invite_link
     try:
         await userbot.join_chat(link)
@@ -42,10 +38,15 @@ async def main_func(bot: Stark, msg: Message):
         userbot_id,
         can_delete_messages=True
     )
-    # numbers = list(range(msg.message_id-1, 0, -1))
     numbers = []
-    async for m in userbot.iter_history(msg.chat.id):
-        numbers.append(m.message_id)
+    while True:
+        try:
+            async for m in userbot.iter_history(msg.chat.id):
+                numbers.append(m.message_id)
+            break
+        except FloodWait as e:
+            await msg.react(f"You need to wait for: {e.x} seconds. \n\nTelegram Restrictions!")
+            await asyncio.sleep(e.x)
     id_lists = [numbers[i*100:(i+1)*100] for i in range((len(numbers)+100-1) // 100)]
     status = await msg.reply("Trying to delete all messages...")
     for id_list in id_lists:
